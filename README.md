@@ -1,5 +1,5 @@
 # cryptoproject
-Hex function file provided by OGhostyy
+Hex function file provided by oGhostyyy @Prajwal-k-tech
 
 The programs first encrypts a string to base64
 
