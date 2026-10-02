@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include <unordered_map>
+#include <stdexcept>
 
 using namespace std;
 
@@ -16,13 +17,15 @@ string step4decode(const string& input) {
     }
 
     string decoded;
-    unsigned int buffer = 0; 
-    int bitsCollected = 0;   
+    unsigned int buffer = 0;
+    int bitsCollected = 0;
     for (char c : input) {
         if (c == '=') {
             break;
         }
-        buffer = (buffer << 6) | base64Index[c];
+        const auto found = base64Index.find(c);
+        if (found == base64Index.end()) throw invalid_argument("Invalid Base64 character.");
+        buffer = (buffer << 6) | found->second;
         bitsCollected += 6;
 
         while (bitsCollected >= 8) {

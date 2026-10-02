@@ -12,7 +12,7 @@ string step2(string ciphertext) {
 
     for (int i = 0; pepperthun < sizeof(arr) / sizeof(arr[0]) && arr[pepperthun] < len; i++) {
         if (arr[pepperthun] == i) {
-            added = rand() % 65;  // Predictable random number
+            added = rand() % add.size();  // Obfuscation only; not cryptographic randomness
             output += add[added];
             pepperthun++;
             len++;
@@ -44,7 +44,7 @@ string step3decrypt(string pepperd) {
     string output;
 
     for (int i = 0; i < len; i++) {
-        if ( i == arr[pep] && pep <pepperthun-1) {
+        if (pep < pepperthun && i == arr[pep]) {
             pep++;  // Skip the added random character
             continue;
         }

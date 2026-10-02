@@ -14,7 +14,7 @@ string step4(string ciphertext) {
     int pepper =0,input = 0, added = 0;
     int len = ciphertext.size();
 
-    for (int i = 0;arr[pepper] < len; i++) {
+    for (int i = 0; pepper < sizeof(arr) / sizeof(arr[0]) && arr[pepper] < len; i++) {
         if (arr[pepper] == i) {
             added = rand() % 16;
             output += add[added];
@@ -38,9 +38,9 @@ string step1decrypt(string pepperd) {
     for(int i=0; i<sizeof(arr)/sizeof(arr[0]); i++) {
         arr[i] = arr[i]-1;
     }
-    
+
     int len = pepperd.length();
-    
+
     // Count how many positions from arr[] were used during encryption
     int pepper = 0;
     for(int i = 0; i < sizeof(arr)/sizeof(arr[0]); i++) {
@@ -50,13 +50,12 @@ string step1decrypt(string pepperd) {
             break;
         }
     }
-    pepper++;
     int pep = 0;
     int input_pos = 0;  // Track position in the original text
     string output;
 
     for (int i = 0; i < len; i++) {
-        if (i == arr[pep] && pep < pepper-1) {
+        if (pep < pepper && i == arr[pep]) {
             pep++;  // Skip the random character
             continue;
         } else {
